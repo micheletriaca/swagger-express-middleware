@@ -1,7 +1,7 @@
 "use strict";
 
 const path = require("path");
-const mkdirp = require("mkdirp");
+const fs = require("fs");
 
 const rootDir = path.join(__dirname, "..", "..", "..");
 const filesDir = path.join(rootDir, "test", "fixtures", "files");
@@ -40,7 +40,7 @@ const files = module.exports = {
   createTempDir (done) {
     setTimeout(() => {
       let dirName = path.join(files.tempDir, new Date().toJSON().replace(/:/g, "-"));
-      mkdirp(dirName, () => {
+      fs.mkdir(dirName, { recursive: true }, () => {
         done(dirName);
       });
     }, 10);
